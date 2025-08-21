@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 const User = require('../models/user');
 
 const saltRounds = 12;
@@ -45,6 +46,7 @@ router.post('/sign-in', async (req, res) => {
     if (!isPasswordCorrect) {
         return res.status(401).json({ err: 'Invalid credentials.' })
     }
+    
     const payload = { username: user.username, _id : user._id }
 
     const token = jwt.sign({ payload }, process.env.JWT_SECRET)
